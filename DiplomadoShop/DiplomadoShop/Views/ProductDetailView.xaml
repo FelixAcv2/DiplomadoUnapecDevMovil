@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:commons="clr-namespace:DiplomadoShop.Common"
+             commons:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             Title="{Binding Title,Mode=TwoWay}"
+             x:Class="DiplomadoShop.Views.ProductDetailView">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid BackgroundColor="White" RowSpacing="0" ColumnSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="180"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image  Margin="10" Source="{Binding CurrentProduct.ImageUrl}"  Grid.Row="0"  Aspect="AspectFill" VerticalOptions="StartAndExpand"></Image>
+                <!--<Button Grid.Row="0" VerticalOptions="End" HorizontalOptions="End" Margin="0,0,10,0" Text="Añadir" 
+                        Style="{StaticResource RegularButton}"  ></Button>-->
+                <!--Command="{Binding AddToCartCommand}" CommandParameter="{Binding Source={x:Reference quantityEntry},Path=Text}"-->
+                <Grid Grid.Row="1" Margin="5" BackgroundColor="White" RowSpacing="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="0" VerticalOptions="End"
+                            Grid.ColumnSpan="3"
+                            HorizontalOptions="End" Margin="0,0,10,0" Text="Añadir" 
+                        Style="{StaticResource RegularButton}"  ></Button>
+                    <!--<StackLayout Grid.Row="0" Grid.ColumnSpan="3"
+                                 Orientation="Horizontal"
+                                 >
+                        
+                        <Label Text="Cant: "
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center"
+                                   FontSize="8"
+                               />
+                        <Entry x:Name="quantityEntry"
+                                   IsEnabled="False"
+                                   Text="{Binding  Source={x:Reference quantityStepper},Path=Value }"
+                                   FontAttributes="Bold"
+                                   FontSize="10"
+                                   HorizontalTextAlignment="Center"
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="Center"/>
+                        <Stepper x:Name="quantityStepper"
+                                     Value="{Binding Quantity.Value,Mode=TwoWay}"
+                                     Increment="1"
+                                     Minimum="1"
+                                     Maximum="9999999"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="Center"
+                                   
+                                  >
+
+                        </Stepper>
+
+                    </StackLayout>-->
+                    <Label  Text="{Binding CurrentProduct.Name,Mode=TwoWay}"  Grid.Row="1" Grid.ColumnSpan="2"   Margin="3" ></Label>
+                    <Label  Text="{Binding CurrentProduct.Price,Mode=TwoWay}" HorizontalOptions="EndAndExpand"  Grid.Row="1" Grid.Column="2" Margin="3"  Style="{StaticResource ProductTilePriceStyle}" HorizontalTextAlignment="End"></Label>
+                    <Label  Text="{Binding CurrentProduct.ShortDescription,Mode=TwoWay}"  Grid.Column="0" Grid.Row="2" Margin="3" Grid.ColumnSpan="3"  Style="{StaticResource ProductTileDescriptionStyle}"></Label>
+                
+                </Grid>
+                <Label  Text="{Binding CurrentProduct.LongDescription,Mode=TwoWay}" Margin="5" Style="{StaticResource ProductLongDescriptionStyle}" Grid.Row="2" ></Label>
+                <Button Grid.Row="3" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,10,0" 
+                        Text="Leer la descripción" Style="{StaticResource RegularButton}" 
+                      
+                        ></Button>
+                <!--Command="{Binding ReadDescriptionCommand}"-->
+                <Grid Grid.Row="4">
+                    <Image Source="patternwide.png" HeightRequest="50" Aspect="Fill"></Image>
+                    <Label Text="© 2019 Diplomado Shop" HorizontalOptions="Center" VerticalOptions="Center" Style="{StaticResource RegularStyle}"></Label>
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

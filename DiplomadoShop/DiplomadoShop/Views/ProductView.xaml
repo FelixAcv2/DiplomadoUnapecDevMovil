@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:models="clr-namespace:DiplomadoShop.Models"
+             xmlns:ViewModels="clr-namespace:DiplomadoShop.ViewModels"
+             xmlns:commons="clr-namespace:DiplomadoShop.Common"
+             BackgroundColor="{StaticResource BackgrounColor}"
+             Title="{Binding Title,Mode=TwoWay}"
+             x:Class="DiplomadoShop.Views.ProductView"
+             commons:ViewModelLocator.AutoWireViewModel="True"
+             >
+
+    <!--<ContentPage.BindingContext>
+        <ViewModels:ProductViewModel/>
+    </ContentPage.BindingContext>-->
+    
+    <ContentPage.Content>
+
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackLayout VerticalOptions="StartAndExpand" 
+                         Spacing="10"
+                         >
+                <SearchBar x:Name="rootSearchBar"  
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Search product"
+                           >
+                  
+                </SearchBar>
+
+            </StackLayout>
+
+            <ListView x:Name="productListview"
+                  x:FieldModifier="public"
+                  HasUnevenRows="True"
+                 Grid.Row="1"
+                 ItemsSource="{Binding Products}"
+               >
+
+                <!--<ListView.ItemsSource>
+                    <x:Array Type="{x:Type models:Product}">
+                        <models:Product  Id="1" Name="Logitech Desktop MK120" 
+                                         Price="956.23"  ImageUrl="ic_keyboard_product.png" 
+                                         LongDescription="Input Device:	Keyboard Pointing Device:Mouse Miscellaneous" 
+                                         ShortDescription="Logitech Desktop MK120 keyboard and mouse set English" InStock="True" IsProductOfTheWeek="False" 
+                        />
+                        
+                    </x:Array>
+                </ListView.ItemsSource>-->
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <StackLayout Orientation="Horizontal" Padding="5">
+                                <Image Source="{Binding ImageUrl}" HorizontalOptions="Start" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="{Binding Name}" HorizontalOptions="CenterAndExpand" />
+                                <Label Text="{Binding Price}" HorizontalOptions="EndAndExpand"/>
+
+                            </StackLayout>
+                               
+                           
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+        </Grid>
+        
+        
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Title="{Binding Title,Mode=TwoWay}"
+             xmlns:commons="clr-namespace:DiplomadoShop.Common"
+             xmlns:behaviors="clr-namespace:DiplomadoShop.Behaviors"
+             x:Class="DiplomadoShop.Views.HomeView"
+             commons:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:viewmodels="clr-namespace:DiplomadoShop.ViewModels"
+             x:Name="HomeViewPage"
+             >
+  
+    
+    
+    <Grid>
+        <!--Header="{Binding .}"-->
+        <ListView VerticalOptions="FillAndExpand"
+                  SelectionMode="None"
+                  Footer="{Binding .}" 
+                  ItemsSource="{Binding ProductsOfTheWeek}" 
+                  CachingStrategy="RecycleElement"
+            SeparatorVisibility="None" 
+            HasUnevenRows="True">
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ProductTappedCommand}" 
+                                                  EventArgsConverter="{StaticResource LocalItemTappedConverter}" >
+                </behaviors:EventToCommandBehavior>
+            </ListView.Behaviors>
+            <!--<ListView.HeaderTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="8*"></RowDefinition>
+                            <RowDefinition Height="2*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Image HeightRequest="10" Grid.Row="0" Source=""  Aspect="AspectFill"></Image>
+                        <StackLayout Grid.Row="1">
+                            <Label Text="OFECTAS DE LA SEMANA " Style="{StaticResource PageHeaderStyle}" HorizontalOptions="CenterAndExpand"></Label>
+                            <Label Text="Nuestra selección semanal" Style="{StaticResource RegularStyle}" HorizontalOptions="CenterAndExpand"></Label>
+                        </StackLayout>
+                    </Grid>
+                </DataTemplate>
+            </ListView.HeaderTemplate>-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame Margin="10" Padding="10" HeightRequest="200" >
+                            <Grid Margin="1" BackgroundColor="White" RowSpacing="0" HeightRequest="200" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="6*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition Height="2*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Row="0" Grid.ColumnSpan="2" Aspect="AspectFill" Source="{Binding ImageUrl}" HeightRequest="100" WidthRequest="100"></Image>
+                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding Name}" ></Label>
+                                <Label Grid.Row="1" Grid.Column="1"  Text="{Binding Price}"  HorizontalTextAlignment="End"></Label>
+                                <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding ShortDescription}" ></Label>
+                                <Button Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Text="Añadir al carrito" Style="{StaticResource RegularButton}"  Command="{Binding Source={x:Reference HomeViewPage}, Path=BindingContext.AddToCartCommand}" CommandParameter="{Binding}" ></Button>
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.FooterTemplate>
+                <DataTemplate>
+                    <Grid RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="6*"></RowDefinition>
+                            <RowDefinition Height="2*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid BackgroundColor="White">
+                            <Image HeightRequest="200" Margin="10" WidthRequest="200" Source="springsale.jpg" ></Image>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </ListView.FooterTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>

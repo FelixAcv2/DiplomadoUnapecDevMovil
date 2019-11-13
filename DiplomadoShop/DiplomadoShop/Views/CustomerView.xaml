@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:models="clr-namespace:DiplomadoShop.Models"
+           
+              BackgroundColor="{StaticResource BackgrounColor}"
+             Title="{Binding Title,Mode=TwoWay}"
+             x:Class="DiplomadoShop.Views.CustomerView">
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackLayout VerticalOptions="StartAndExpand" 
+                         Spacing="10"
+                         >
+                <SearchBar x:Name="rootSearchBar"  
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Search customer"
+                           >
+
+                </SearchBar>
+
+            </StackLayout>
+
+            <ListView x:Name="customerListview"
+                 
+                  ItemsSource="{Binding Customers}"
+                 Grid.Row="1"
+               >
+
+                <!--<ListView.ItemsSource>
+                    <x:Array Type="{x:Type models:Customer}">
+                        <models:Customer Id="1" Name="JOSE CARRERA"  Address="AV. JUAN P. DUARTE EDIF PIKI" 
+                                          Number_Phone="809-583-5896"
+                                          Email="carrera@gmail.com"
+                                          City="SANTIAGO"
+                                          State="SANTIAGO"
+                                          ZipCode="51000"
+                                          ImageUrl="ic_specialist_user.png"
+                                         />
+                    </x:Array>
+                </ListView.ItemsSource>-->
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <StackLayout Orientation="Horizontal" Padding="5">
+                                <Image Source="{Binding ImageUrl}" HorizontalOptions="Start"/>
+                                <Label Text="{Binding Name}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+                                <Label Text="{Binding Number_Phone}" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
+
+                            </StackLayout>
+
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>
