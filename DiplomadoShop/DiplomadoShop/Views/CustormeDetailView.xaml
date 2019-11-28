@@ -4,12 +4,14 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:commons="clr-namespace:DiplomadoShop.Common"
+             commons:ViewModelLocator.AutoWireViewModel="True"
              BackgroundColor="{StaticResource BackgrounColor}"
              Title="Custorme Detail"
              x:Class="DiplomadoShop.Views.CustormeDetailView">
     <ContentPage.Content>
 
-
+        <ScrollView>
         <StackLayout Padding="24,48,24,24" 
                     >
             <Frame HasShadow="False"
@@ -23,7 +25,7 @@
                 <Image Source="ic_specialist_user.png"/>
             </Frame>
             <Label HorizontalOptions="Center"
-                   x:Name="lbName"
+                    Text="{Binding CurrentCustomer.Name,Mode=TwoWay}"
                    />
             
 
@@ -38,9 +40,9 @@
             <ImageButton Source="ic_phone.png" Grid.Row="0" 
                          VerticalOptions="Center"
                          BackgroundColor="Transparent"
-                         Clicked="NumberPhone_Click"
+                         
                          />
-                <Label x:Name="lbNumberPhone"
+                <Label Text="{Binding CurrentCustomer.NumberPhone}"
                     Grid.Column="1" 
                     Grid.Row="0"
                     VerticalOptions="Center"
@@ -51,7 +53,7 @@
                          Grid.Column="2" 
                          VerticalOptions="Center"
                          BackgroundColor="Transparent"
-                         Clicked="SMS_CLick"
+                        
                          />
 
             <!--Email-->
@@ -59,10 +61,10 @@
                          Grid.Row="1"  
                          VerticalOptions="Center"
                          BackgroundColor="Transparent"
-                         Clicked="Email_Click"
+                         
                          />
 
-            <Label x:Name="lbEmail"
+                <Label Text="{Binding CurrentCustomer.Email,Mode=TwoWay}"
                    Grid.Column="1" 
                    Grid.Row="1"
                    VerticalOptions="Center"
@@ -73,7 +75,7 @@
                          Grid.Row="2" 
                          VerticalOptions="Center"
                          BackgroundColor="Transparent"
-                         Clicked="NavigateAddress_Click"
+                       
                          />
 
                 <StackLayout 
@@ -81,14 +83,14 @@
                          Grid.Row="2" 
                          VerticalOptions="Center">
 
-                    <Label x:Name="lbAddress" x:FieldModifier="public">
+                    <Label Text="{Binding CurrentCustomer.Address,Mode=TwoWay} " >
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span x:Name="spCity" x:FieldModifier="public"/>
+                                <Span Text="{Binding CurrentCustomer.City,Mode=TwoWay}"  />
                             <Span Text=" "/>
-                            <Span x:Name="spState" x:FieldModifier="public"/>
+                                <Span Text="{Binding CurrentCustomer.State,Mode=TwoWay}"  />
                             <Span Text=", "/>
-                            <Span x:Name="spZipCode"  x:FieldModifier="public"/>
+                                <Span Text="{Binding CurrentCustomer.ZipCode,Mode=TwoWay}" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -97,5 +99,6 @@
         </Grid>
 
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

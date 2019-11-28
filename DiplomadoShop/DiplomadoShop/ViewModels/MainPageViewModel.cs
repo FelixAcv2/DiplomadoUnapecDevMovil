@@ -27,7 +27,7 @@ namespace DiplomadoShop.ViewModels
         {
             if (menu!=null) {
 
-                _navigationService.NavigateToAsync(menu.ViewType);
+                _navigationService.NavigateToAsync(menu.ViewType);   
             }
         }
 
@@ -38,7 +38,7 @@ namespace DiplomadoShop.ViewModels
             MenuItems = new ObservableCollection<NavigationMenuItems>();
             LoadData();
         }
-        public override void LoadData()
+        public  void LoadData()
         {
             var _results = _navigationMenuItemRepository.LoadMenu();
 

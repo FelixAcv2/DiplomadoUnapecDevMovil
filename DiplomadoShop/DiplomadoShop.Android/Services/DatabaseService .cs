@@ -10,7 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using DiplomadoShop.Contract.General;
+using DiplomadoShop.Contract.Data;
 using DiplomadoShop.Droid.Services;
 using SQLite;
 using Xamarin.Forms;

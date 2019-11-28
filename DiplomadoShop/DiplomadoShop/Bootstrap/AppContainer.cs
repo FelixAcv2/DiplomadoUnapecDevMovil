@@ -1,7 +1,9 @@
 ﻿using CommonServiceLocator;
 using DiplomadoShop.Contract.Data;
+using DiplomadoShop.Contract.DataService;
 using DiplomadoShop.Contract.General;
 using DiplomadoShop.Services.Data;
+using DiplomadoShop.Services.DataService;
 using DiplomadoShop.Services.General;
 using DiplomadoShop.ViewModels;
 using DiplomadoShop.Views;
@@ -40,6 +42,10 @@ namespace DiplomadoShop.Bootstrap
             _container.RegisterType<IProductRepository, ProductRepository>();
             _container.RegisterType<IProductRepository, ProductOfWeekRepository>();
             _container.RegisterType<INavigationService, NavigationService>();
+
+            _container.RegisterType<LocalDatabaseManager>();
+            _container.RegisterType<IApiService, ApiService>();
+            _container.RegisterType<ICustomerDataService, CustomerDataService>();
             
 
             var _serviceLocator = new UnityServiceLocator(_container);

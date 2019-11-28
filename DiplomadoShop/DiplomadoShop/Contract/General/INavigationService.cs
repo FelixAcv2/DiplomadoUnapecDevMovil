@@ -10,18 +10,23 @@ namespace DiplomadoShop.Contract.General
     {
 
         Task InitializeAsync();
-
-
         Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase;
 
         Task NavigateToAsync<TViewModel>(object parameter) where TViewModel : ViewModelBase;
 
-
         Task NavigateToAsync(Type viewModelType);
 
-
         Task NavigateToAsync(Type viewModelType, object parameter);
-       
+
+
+        Task ClearBackStack();
+
+        Task NavigateBackAsync();
+
+        Task RemoveLastFromBackStackAsync();
+
+        Task PopToRootAsync();
+
 
 
     }

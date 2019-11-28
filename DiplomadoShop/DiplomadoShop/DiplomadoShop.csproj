@@ -11,7 +11,8 @@
 
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.4" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.7.302-beta" />
+    <PackageReference Include="Polly" Version="7.2.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
     <PackageReference Include="Unity" Version="5.11.1" />
     <PackageReference Include="Unity.ServiceLocation" Version="5.11.1" />
@@ -21,6 +22,12 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Views\ContactView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CustomerAddView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CustomerLocalView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\CustomerView.xaml">

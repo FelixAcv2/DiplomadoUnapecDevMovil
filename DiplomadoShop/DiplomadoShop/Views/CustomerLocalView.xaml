@@ -5,14 +5,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:commons="clr-namespace:DiplomadoShop.Common"
+             xmlns:behaviors="clr-namespace:DiplomadoShop.Behaviors"
              commons:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:models="clr-namespace:DiplomadoShop.Models"
-           
-              BackgroundColor="{StaticResource BackgrounColor}"
              Title="{Binding Title,Mode=TwoWay}"
-             x:Class="DiplomadoShop.Views.CustomerView">
-    <ContentPage.Content>
+             x:Class="DiplomadoShop.Views.CustomerLocalView">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New" Command="{Binding AddCustomerCommand}" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -22,91 +24,94 @@
             <StackLayout VerticalOptions="StartAndExpand" 
                          Spacing="10"
                          >
-                <SearchBar x:Name="rootSearchBar"  
+                <SearchBar  
                            HorizontalOptions="FillAndExpand" 
                            Placeholder="Search customer"
+                           Text="{Binding FilterName,Mode=TwoWay}"
                            >
+                    <SearchBar.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding FilterCommand}"/>
+                    </SearchBar.Behaviors>
 
                 </SearchBar>
 
             </StackLayout>
 
-            <ListView x:Name="customerListview"
-                 
+            <ListView 
+                 x:Name="listCustome"
                   ItemsSource="{Binding Customers}"
+                  HasUnevenRows="True"
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsRefresh,Mode=TwoWay}"
+                  RefreshCommand="{Binding RefreshCommand}"
                  Grid.Row="1"
                >
 
-                <!--<ListView.ItemsSource>
-                    <x:Array Type="{x:Type models:Customer}">
-                        <models:Customer Id="1" Name="JOSE CARRERA"  Address="AV. JUAN P. DUARTE EDIF PIKI" 
-                                          Number_Phone="809-583-5896"
-                                          Email="carrera@gmail.com"
-                                          City="SANTIAGO"
-                                          State="SANTIAGO"
-                                          ZipCode="51000"
-                                          ImageUrl="ic_specialist_user.png"
-                                         />
-                    </x:Array>
-                </ListView.ItemsSource>-->
+                <!--<ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding CustomerTappedCommand}" 
+                                                  EventArgsConverter="{StaticResource LocalItemTappedConverter}" >
+                    </behaviors:EventToCommandBehavior>
+                </ListView.Behaviors>-->
+
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-
                         <ImageCell ImageSource="ic_specialist_user.png"
-                                   Text="{Binding Name }"
-                                   Detail="{Binding NumberPhone}"
+                                   Text="{Binding NumberPhone}"
+                                   Detail="{Binding Name}"
                                    >
                             <ImageCell.ContextActions>
                                 <ToolbarItem Text="Edit" 
                                              Command="{Binding Path=BindingContext.EditCustomerCommand, Source={x:Reference listCustome}}" CommandParameter="{Binding .}" IsDestructive="False"
                                              
                                              >
-
+                                    
                                 </ToolbarItem>
                                 <ToolbarItem Text="Detail" 
                                               Command="{Binding Path=BindingContext.DetailCustomerCommand, Source={x:Reference listCustome}}" CommandParameter="{Binding .}" IsDestructive="False"
                                              
                                              >
-
+                                    
                                 </ToolbarItem>
                                 <ToolbarItem Text="Remover" 
-                                              Command="{Binding Path=BindingContext.RemoverCustomerCommand, Source={x:Reference listCustome}}" CommandParameter="{Binding .}" IsDestructive="True"
+                                              Command="{Binding Path=BindingContext.RemoverCustomerCommand, Source={x:Reference listCustome}}" CommandParameter="{Binding .}" IsDestructive="False"
                                              
                                              >
 
                                 </ToolbarItem>
-                              
+                                <!--<MenuItem Text="Edit" Command="{Binding EditCustomerCommand}" />
+                                <MenuItem Text="Detail"/>
+                                <MenuItem Text="Remover"/>-->
+
                             </ImageCell.ContextActions>
-
+                         
                         </ImageCell>
+                        
 
-
-                        <!--<ViewCell>
-
-                            <StackLayout Orientation="Horizontal" Padding="5">
+                        <!--<StackLayout Orientation="Horizontal" Padding="5">
+                                
                                 <Image Source="{Binding ImageUrl}" HorizontalOptions="Start"/>
                                 <Label Text="{Binding Name}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
                                 <Label Text="{Binding Number_Phone}" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
 
-                            </StackLayout>
+                            </StackLayout>-->
 
-                        
-                        </ViewCell>-->
+
+                       
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
-                
             </ListView>
 
             <ActivityIndicator  Grid.Row="1"
                                 HorizontalOptions="CenterAndExpand"
                                 VerticalOptions="CenterAndExpand"
-                                IsRunning="{Binding IsBusy,Mode=TwoWay}"
-                                IsVisible="{Binding IsBusy,Mode=TwoWay}"
-                                ></ActivityIndicator>
-
+                                IsRunning="{Binding IsRefresh,Mode=TwoWay}"
+                                IsVisible="{Binding IsRefresh,Mode=TwoWay}"
+                                >
+                
+            </ActivityIndicator>
+            
         </Grid>
-
     </ContentPage.Content>
 </ContentPage>

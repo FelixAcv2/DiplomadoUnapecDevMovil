@@ -14,52 +14,52 @@ namespace DiplomadoShop.Views
     public partial class CustormeDetailView : ContentPage
     {
 
-        public Customer CurrentCustomer { get; set; }
+       // public Customer CurrentCustomer { get; set; }
         public CustormeDetailView()
         {
             InitializeComponent();
             
         }
 
-        public CustormeDetailView(Customer customer):this()
-        {
-             CurrentCustomer = customer;
+        //public CustormeDetailView(Customer customer):this()
+        //{
+        //     CurrentCustomer = customer;
 
-             this.lbName.Text = CurrentCustomer.Name;
-             this.lbNumberPhone.Text = CurrentCustomer.Number_Phone;
-             this.lbEmail.Text = CurrentCustomer.Email;
-             this.lbAddress.Text = CurrentCustomer.Address;
-             this.spCity.Text = CurrentCustomer.City;
-             this.spState.Text = CurrentCustomer.State;
-            this.spZipCode.Text = CurrentCustomer.ZipCode;
+        //     this.lbName.Text = CurrentCustomer.Name;
+        //     this.lbNumberPhone.Text = CurrentCustomer.NumberPhone;
+        //     this.lbEmail.Text = CurrentCustomer.Email;
+        //     this.lbAddress.Text = CurrentCustomer.Address;
+        //     this.spCity.Text = CurrentCustomer.City;
+        //     this.spState.Text = CurrentCustomer.State;
+        //    this.spZipCode.Text = CurrentCustomer.ZipCode;
 
-        }
+        //}
 
-        private async void Email_Click(object sender, EventArgs e)
-        {
+        //private async void Email_Click(object sender, EventArgs e)
+        //{
 
-            await Email.ComposeAsync(string.Empty, string.Empty, CurrentCustomer.Email);
-        }
+        //    await Email.ComposeAsync(string.Empty, string.Empty, CurrentCustomer.Email);
+        //}
 
-        private async void SMS_CLick(object sender, EventArgs e)
-        {
-            await Sms.ComposeAsync(new SmsMessage(string.Empty,CurrentCustomer.Number_Phone));
-        }
+        //private async void SMS_CLick(object sender, EventArgs e)
+        //{
+        //    await Sms.ComposeAsync(new SmsMessage(string.Empty,CurrentCustomer.NumberPhone));
+        //}
 
-        private  void NumberPhone_Click(object sender, EventArgs e)
-        {
-            PhoneDialer.Open(CurrentCustomer.Number_Phone);
-        }
+        //private  void NumberPhone_Click(object sender, EventArgs e)
+        //{
+        //    PhoneDialer.Open(CurrentCustomer.NumberPhone);
+        //}
 
-        private async void NavigateAddress_Click(object sender, EventArgs e)
-        {
-            await Map.OpenAsync(new Placemark
-            {
-                Thoroughfare = CurrentCustomer.Address,
-                Locality = CurrentCustomer.City,
-                AdminArea = CurrentCustomer.State,
-                PostalCode = CurrentCustomer.ZipCode
-            });
-        }
+        //private async void NavigateAddress_Click(object sender, EventArgs e)
+        //{
+        //    await Map.OpenAsync(new Placemark
+        //    {
+        //        Thoroughfare = CurrentCustomer.Address,
+        //        Locality = CurrentCustomer.City,
+        //        AdminArea = CurrentCustomer.State,
+        //        PostalCode = CurrentCustomer.ZipCode
+        //    });
+        //}
     }
 }

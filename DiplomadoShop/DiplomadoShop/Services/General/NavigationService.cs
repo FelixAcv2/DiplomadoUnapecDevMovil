@@ -19,6 +19,46 @@ namespace DiplomadoShop.Services.General
     public class NavigationService : INavigationService
     {
         protected Application CurrentApplication => Application.Current;
+
+        public async Task ClearBackStack()
+        {
+            await CurrentApplication.MainPage.Navigation.PopToRootAsync();
+        }
+
+      
+        public async Task NavigateBackAsync()
+        {
+            if (CurrentApplication.MainPage is MasterDetailPageView mainPage)
+            {
+                await mainPage.Detail.Navigation.PopAsync();
+            }
+            else if (CurrentApplication.MainPage != null)
+            {
+                await CurrentApplication.MainPage.Navigation.PopAsync();
+            }
+        }
+
+        public async Task PopToRootAsync()
+        {
+            if (CurrentApplication.MainPage is MasterDetailPageView mainPage)
+            {
+                await mainPage.Detail.Navigation.PopToRootAsync();
+            }
+        }
+
+        public Task RemoveLastFromBackStackAsync()
+        {
+            if (CurrentApplication.MainPage is MasterDetailPageView mainPage)
+            {
+                mainPage.Detail.Navigation.RemovePage(
+                    mainPage.Detail.Navigation.NavigationStack[mainPage.Detail.Navigation.NavigationStack.Count - 2]);
+            }
+
+            return Task.FromResult(true);
+        }
+
+        //-----------------------------------------
+
         public async Task InitializeAsync()
         {
             await NavigateToAsync<MasterDetailPageViewModel>();
@@ -43,6 +83,8 @@ namespace DiplomadoShop.Services.General
         {
             await InternalNavigateToAsync(viewModelType,parameter);
         }
+
+     
 
         protected virtual async Task InternalNavigateToAsync(Type viewModelType, object parameter)
         {
