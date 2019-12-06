@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Unity;
+using Unity.Lifetime;
 using Unity.ServiceLocation;
 
 namespace DiplomadoShop.Bootstrap
@@ -29,6 +30,14 @@ namespace DiplomadoShop.Bootstrap
         {
             _container = new UnityContainer();
 
+
+            _container.RegisterType<IAuthenticationService, AuthenticationService>(new ContainerControlledLifetimeManager());
+            //_container.RegisterType<IConnectionService, ConnectionService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IDialogService, DialogService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
+           // _container.RegisterType<IPhoneService, PhoneService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ISettingsService, SettingsService>(new ContainerControlledLifetimeManager());
+
             _container.RegisterType<ProductViewModel>();
             _container.RegisterType<HomeViewModel>();
             _container.RegisterType<HomeView>();
@@ -36,16 +45,19 @@ namespace DiplomadoShop.Bootstrap
             _container.RegisterType<CustomerView>();
             _container.RegisterType<MainPageView>();
             _container.RegisterType<MasterDetailPageView>();
+            _container.RegisterType<ShoppingCartView>();
+            
            // _container.RegisterType(typeof(MainPageViewModel),typeof(MainPageView));
             _container.RegisterType<MainPageViewModel>();
             
             _container.RegisterType<IProductRepository, ProductRepository>();
             _container.RegisterType<IProductRepository, ProductOfWeekRepository>();
-            _container.RegisterType<INavigationService, NavigationService>();
+           // _container.RegisterType<INavigationService, NavigationService>();
 
             _container.RegisterType<LocalDatabaseManager>();
             _container.RegisterType<IApiService, ApiService>();
             _container.RegisterType<ICustomerDataService, CustomerDataService>();
+            _container.RegisterType<IProductDataService, ProductDataService>();
             
 
             var _serviceLocator = new UnityServiceLocator(_container);

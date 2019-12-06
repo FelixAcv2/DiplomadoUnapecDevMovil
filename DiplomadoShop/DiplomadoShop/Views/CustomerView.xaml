@@ -7,7 +7,7 @@
              xmlns:commons="clr-namespace:DiplomadoShop.Common"
              commons:ViewModelLocator.AutoWireViewModel="True"
              xmlns:models="clr-namespace:DiplomadoShop.Models"
-           
+             xmlns:behaviors="clr-namespace:DiplomadoShop.Behaviors"
               BackgroundColor="{StaticResource BackgrounColor}"
              Title="{Binding Title,Mode=TwoWay}"
              x:Class="DiplomadoShop.Views.CustomerView">
@@ -25,7 +25,12 @@
                 <SearchBar x:Name="rootSearchBar"  
                            HorizontalOptions="FillAndExpand" 
                            Placeholder="Search customer"
+                           Text="{Binding FilterName,Mode=TwoWay}"
+                          
                            >
+                    <SearchBar.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding FilterCommand}"/>
+                    </SearchBar.Behaviors>
 
                 </SearchBar>
 
@@ -34,6 +39,10 @@
             <ListView x:Name="customerListview"
                  
                   ItemsSource="{Binding Customers}"
+                  HasUnevenRows="True"
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsRefresh,Mode=TwoWay}"
+                  RefreshCommand="{Binding RefreshCommand}"
                  Grid.Row="1"
                >
 
@@ -59,19 +68,19 @@
                                    >
                             <ImageCell.ContextActions>
                                 <ToolbarItem Text="Edit" 
-                                             Command="{Binding Path=BindingContext.EditCustomerCommand, Source={x:Reference listCustome}}" CommandParameter="{Binding .}" IsDestructive="False"
+                                             Command="{Binding Path=BindingContext.EditCustomerCommand, Source={x:Reference customerListview}}" CommandParameter="{Binding .}" IsDestructive="False"
                                              
                                              >
 
                                 </ToolbarItem>
                                 <ToolbarItem Text="Detail" 
-                                              Command="{Binding Path=BindingContext.DetailCustomerCommand, Source={x:Reference listCustome}}" CommandParameter="{Binding .}" IsDestructive="False"
+                                              Command="{Binding Path=BindingContext.DetailCustomerCommand, Source={x:Reference customerListview}}" CommandParameter="{Binding .}" IsDestructive="False"
                                              
                                              >
 
                                 </ToolbarItem>
                                 <ToolbarItem Text="Remover" 
-                                              Command="{Binding Path=BindingContext.RemoverCustomerCommand, Source={x:Reference listCustome}}" CommandParameter="{Binding .}" IsDestructive="True"
+                                              Command="{Binding Path=BindingContext.RemoverCustomerCommand, Source={x:Reference customerListview}}" CommandParameter="{Binding .}" IsDestructive="True"
                                              
                                              >
 

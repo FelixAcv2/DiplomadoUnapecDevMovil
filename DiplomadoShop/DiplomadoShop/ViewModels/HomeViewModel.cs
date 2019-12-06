@@ -1,4 +1,5 @@
 ﻿using DiplomadoShop.Common;
+using DiplomadoShop.Constants;
 using DiplomadoShop.Contract.General;
 using DiplomadoShop.Extensions;
 using DiplomadoShop.Models;
@@ -17,28 +18,28 @@ namespace DiplomadoShop.ViewModels
     {
         ProductOfWeekRepository _productOfWeekRepository;
         private readonly INavigationService _navigationService;
+        readonly IDialogService _dialogService ;
         public ICommand ProductTappedCommand => new Command(OnProductTappedCommand);
         public ICommand AddToCartCommand => new Command<Product>(OnAddToCart);
 
       
-        public HomeViewModel(ProductOfWeekRepository productOfWeekRepository, INavigationService navigationService)
+        public HomeViewModel(ProductOfWeekRepository productOfWeekRepository, INavigationService navigationService, IDialogService dialogService)
         {
             _productOfWeekRepository = productOfWeekRepository;
             _navigationService = navigationService;
+            _dialogService = dialogService;
             Title = "Products Of The Week";
             LoadProducts();
         }
 
 
-        private void OnAddToCart(Product product)
+        private async void OnAddToCart(Product product)
         {
 
             if (product != null)
             {
-
-                App.Master.DisplayAlert("Anadir a la order ", product.Name, "OK");
-
-
+                MessagingCenter.Send(this, MessagingConstants.AddProductToBasket, product);
+                await _dialogService.ShowDialog("Producto agregado a su carro", "Success", "OK");
             }
         }
 

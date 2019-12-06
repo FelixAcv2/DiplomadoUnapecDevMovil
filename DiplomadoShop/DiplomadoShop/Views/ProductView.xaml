@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              xmlns:models="clr-namespace:DiplomadoShop.Models"
              xmlns:ViewModels="clr-namespace:DiplomadoShop.ViewModels"
+             xmlns:behaviors="clr-namespace:DiplomadoShop.Behaviors"
              xmlns:commons="clr-namespace:DiplomadoShop.Common"
              BackgroundColor="{StaticResource BackgrounColor}"
              Title="{Binding Title,Mode=TwoWay}"
@@ -31,30 +32,33 @@
                          >
                 <SearchBar x:Name="rootSearchBar"  
                            HorizontalOptions="FillAndExpand" 
-                           Placeholder="Search product"
+                           Placeholder="Search customer"
+                           Text="{Binding FilterName,Mode=TwoWay}"
+                          
                            >
-                  
+                    <SearchBar.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding FilterCommand}"/>
+                    </SearchBar.Behaviors>
+
                 </SearchBar>
 
             </StackLayout>
 
             <ListView x:Name="productListview"
-                  x:FieldModifier="public"
-                  HasUnevenRows="True"
-                 Grid.Row="1"
-                 ItemsSource="{Binding Products}"
+                 
+                      HasUnevenRows="True"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsRefresh,Mode=TwoWay}"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      Grid.Row="1"
+                     ItemsSource="{Binding Products}"
                >
 
-                <!--<ListView.ItemsSource>
-                    <x:Array Type="{x:Type models:Product}">
-                        <models:Product  Id="1" Name="Logitech Desktop MK120" 
-                                         Price="956.23"  ImageUrl="ic_keyboard_product.png" 
-                                         LongDescription="Input Device:	Keyboard Pointing Device:Mouse Miscellaneous" 
-                                         ShortDescription="Logitech Desktop MK120 keyboard and mouse set English" InStock="True" IsProductOfTheWeek="False" 
-                        />
-                        
-                    </x:Array>
-                </ListView.ItemsSource>-->
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ProductTappedCommand}" 
+                                                  EventArgsConverter="{StaticResource LocalItemTappedConverter}" >
+                    </behaviors:EventToCommandBehavior>
+                </ListView.Behaviors>
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -73,6 +77,14 @@
                 </ListView.ItemTemplate>
 
             </ListView>
+
+            <!--<ActivityIndicator  Grid.Row="1"
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                IsRunning="{Binding IsBusy,Mode=TwoWay}"
+                                IsVisible="{Binding IsBusy,Mode=TwoWay}"
+                                ></ActivityIndicator>-->
+
 
         </Grid>
         

@@ -10,37 +10,37 @@ using System.Threading.Tasks;
 
 namespace DiplomadoShop.Services.DataService
 {
-   public class CustomerDataService: ICustomerDataService
+    public class ProductDataService : IProductDataService
     {
         IApiService _apiService;
 
-        public CustomerDataService(IApiService apiService)
+        public ProductDataService(IApiService apiService)
         {
             _apiService = apiService;
         }
 
-        public async Task<IEnumerable<Customer>> CustomersAsync()
+        public async Task<IEnumerable<Product>> ProductsAsync()
         {
-            IEnumerable<Customer> _customers = null;
+            IEnumerable<Product> _products = null;
 
             try
             {
-                var _url = ApiConstants.BaseApiUrl + ApiConstants.CustomerAllEndpoint;
+                var _url = ApiConstants.BaseApiUrl + ApiConstants.ProducAllEndpoint;
 
-                _customers=  await _apiService.GetAsync<IEnumerable<Customer>>(_url);
-               
+                return await _apiService.GetAsync<IEnumerable<Product>>(_url);
+
             }
             catch (Exception ex)
             {
                 if (ex is ConnectionException)
                 {
-                   
+
                     Debug.WriteLine($"Loading data local Faile: {ex.Message}");
                     throw new ConnectionException();
                 }
 
             }
-            return _customers;
+            return _products;
         }
     }
 }

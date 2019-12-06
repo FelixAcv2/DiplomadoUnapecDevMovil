@@ -170,7 +170,10 @@
             </Style>
 
             <converters:ItemTappedConverter x:Key="LocalItemTappedConverter"></converters:ItemTappedConverter>
-
+            <!--<converters:ItemTappedConverter x:Key="LocalItemTappedConverter"></converters:ItemTappedConverter>-->
+            <converters:CountToVisibilityConverter x:Key="LocalCountToVisibilityConverter"></converters:CountToVisibilityConverter>
+            <converters:CurrencyConverter x:Key="LocalCurrencyConverter"></converters:CurrencyConverter>
+            
         </ResourceDictionary>
 
     </Application.Resources>

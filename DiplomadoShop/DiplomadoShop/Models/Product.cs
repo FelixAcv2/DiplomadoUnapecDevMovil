@@ -6,7 +6,7 @@ namespace DiplomadoShop.Models
 {
    public  class Product
     {
-        public int Id { get; set; }
+        public int ProductId { get; set; }
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
@@ -14,6 +14,7 @@ namespace DiplomadoShop.Models
         public string ImageUrl { get; set; }
         public bool IsProductOfTheWeek { get; set; }
         public bool InStock { get; set; }
+
 
     }
 }

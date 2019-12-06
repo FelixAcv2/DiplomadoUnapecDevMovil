@@ -19,7 +19,5 @@ namespace DiplomadoShop.Models
         public string ZipCode { get; set; }
         public string ImageUrl { get; set; }
 
-
-
     }
 }

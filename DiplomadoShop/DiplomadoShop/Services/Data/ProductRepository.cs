@@ -18,7 +18,7 @@ namespace DiplomadoShop.Services.Data
            var _task= Task.Run<List<Product>>(()=>
           {
             return    new List<Product> {
-                 new Product{Id = 1,Name = "Logitech Desktop MK120",Price = 956.23m,ImageUrl = "ic_keyboard_product.png",  
+                 new Product{ProductId = 1,Name = "Logitech Desktop MK120",Price = 956.23m,ImageUrl = "ic_keyboard_product.png",  
                               LongDescription = "Input Device:	Keyboard Pointing Device:Mouse Miscellaneous",
                                ShortDescription = "Logitech Desktop MK120 keyboard and mouse set English", InStock = true,IsProductOfTheWeek = false
 
